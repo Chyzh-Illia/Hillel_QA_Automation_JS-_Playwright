@@ -1,0 +1,27 @@
+{
+  "name": "hillel_qa_automation_js-_playwright",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Chyzh-Illia/Hillel_QA_Automation_JS-_Playwright#readme",
+  "bugs": {
+    "url": "https://github.com/Chyzh-Illia/Hillel_QA_Automation_JS-_Playwright/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chyzh-Illia/Hillel_QA_Automation_JS-_Playwright.git"
+  },
+  "license": "ISC",
+  "author": "chyzh illia",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "pw:open": "npx playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
+}

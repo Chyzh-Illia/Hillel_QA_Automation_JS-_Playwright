@@ -12,7 +12,7 @@ test.describe('verifying negative cases', () => {
         await page.locator('input#signupName').click();
         await page.locator('body').click();
         await expect(page.locator('p', {hasText: 'Name required'})).toHaveText('Name required');
-        await expect(page.locator('input#signupName')).toHaveCSS('border-color', '#dc3545');
+        await expect(page.locator('input#signupName')).toHaveCSS('border-color', 'rgb(220, 53, 69)');
     });
 
     test('Open SignUp modal window => validation required "Last Name" field text', async ( {page} ) => {
@@ -20,7 +20,7 @@ test.describe('verifying negative cases', () => {
         await page.locator('input#signupLastName').click();
         await page.locator('body').click();
         await expect(page.locator('p', {hasText: 'Last name required'})).toHaveText('Last name required');
-        await expect(page.locator('input#signupLastName')).toHaveCSS('border-color', '#dc3545');
+        await expect(page.locator('input#signupLastName')).toHaveCSS('border-color', 'rgb(220, 53, 69)');
     });
 
     test('Open SignUp modal window => validation entry "Email" field text', async ( {page} ) => {
@@ -28,7 +28,7 @@ test.describe('verifying negative cases', () => {
         await page.locator('input#signupEmail').fill('chyzh.illiagmail.com');
         await page.locator('input#signupLastName').click();
         await expect(page.locator('p', {hasText: 'Email is incorrect'})).toHaveText('Email is incorrect');
-        await expect(page.locator('input#signupLastName')).toHaveCSS('border-color', '#dc3545');
+        await expect(page.locator('input#signupEmail')).toHaveCSS('border-color', 'rgb(220, 53, 69)');
     });
 
     test('Open SignUp modal window => validation required "Password" field text', async ( {page} ) => {
@@ -36,7 +36,7 @@ test.describe('verifying negative cases', () => {
         await page.locator('input#signupPassword').click();
         await page.locator('body').click();
         await expect(page.locator('p', {hasText: 'Password required'})).toHaveText('Password required');
-        await expect(page.locator('input#signupPassword')).toHaveCSS('border-color', '#dc3545');
+        await expect(page.locator('input#signupPassword')).toHaveCSS('border-color', 'rgb(220, 53, 69)');
     })
 
     test('Open SignUp modal window => validation entry "Password" field', async ( {page})  => {
@@ -45,7 +45,7 @@ test.describe('verifying negative cases', () => {
         await page.locator('body').click();
         await expect(page.locator('p', {hasText: 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter'}))
         .toHaveText('Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter');
-        await expect(page.locator('input#signupPassword')).toHaveCSS('border-color', '#dc3545');
+        await expect(page.locator('input#signupPassword')).toHaveCSS('border-color', 'rgb(220, 53, 69)');
     })
 
     test('Open SignUp modal window => Registaration without click on the "Register" buttno', async ( {page} ) => {

@@ -28,15 +28,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 
-      process.env.ENV === "quato2"
-        ? process.env.CYPRESS_BASE_URL_QAUTO2
-        : process.env.CYPRESS_BASE_URL_QAUTO1,
-
-      env: {
-        email: process.env.CYPRESS_USER_EMAIL,
-        password: process.env.CYPRESS_USER_PASSWORD,
-      },
+     baseURL: 'https://qauto.forstudy.space',
+    httpCredentials: {
+      username: 'guest',
+      password: 'welcome2qauto',
+    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     screenshot: 'on',

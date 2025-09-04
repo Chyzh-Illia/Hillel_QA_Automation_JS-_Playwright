@@ -36,6 +36,6 @@ test.describe('verifying negative cases', () => {
 
     test('Open SignUp modal window => Registaration without click on the "Register" button', async ( {page} ) => {
         const registrationPassing = new RegistrationPage(page);
-        await registrationPassing.userRegistration('Illia', 'Chyzh', 'chyzh.illia@gmail.com', 'X4x12xdatax', 'X4x12xdatax')
+        await registrationPassing.userRegistration('Illia', 'Chyzh', `${process.env.PLAYWRIGHT_USER_EMAIL}`, `${process.env.PLAYWRIGHT_USER_PASSWORD}`, `${process.env.PLAYWRIGHT_USER_PASSWORD}`)
     });
 });

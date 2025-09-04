@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-require ( 'dotenv' ) . config ();
+require ( 'dotenv' ) .config ();
 
 /**
  * Read environment variables from file.
@@ -28,7 +28,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-     baseURL: 'https://qauto.forstudy.space',
+     baseURL: `https://${process.env.HTTP_USER_AUTHORIZATION}:${process.env.HTTP_USER_AUTHORIZATION}@qauto.forstudy.space`,
     httpCredentials: {
       username: 'guest',
       password: 'welcome2qauto',
@@ -48,11 +48,6 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
 
     /* Test against mobile viewports. */

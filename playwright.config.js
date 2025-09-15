@@ -1,6 +1,9 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 require ( 'dotenv' ) .config ();
+import path from 'path';
+
+const authFile = path.join(__dirname, 'tests/.auth/user.json');
 
 /**
  * Read environment variables from file.
@@ -29,9 +32,10 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
      baseURL: `https://${process.env.HTTP_USER_AUTHORIZATION}:${process.env.HTTP_USER_AUTHORIZATION}@qauto.forstudy.space`,
-    httpCredentials: {
-      username: 'guest',
-      password: 'welcome2qauto',
+     storageState: './tests/.auth/user.json',
+      httpCredentials: {
+        username: 'guest',
+        password: 'welcome2qauto',
     },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
@@ -41,13 +45,26 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*setup\.js/,
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: authFile,
+      },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: authFile,
+      },
     },
 
     /* Test against mobile viewports. */

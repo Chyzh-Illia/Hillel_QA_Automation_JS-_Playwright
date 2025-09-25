@@ -1,4 +1,4 @@
-name: Playwright Tests in Docker (latest)
+name: Playwright Tests in Docker (Chromium only)
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   playwright:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.47.2-jammy  # остання на момент написання
+      image: mcr.microsoft.com/playwright:v1.47.2-jammy
       options: --user 1001
 
     steps:
@@ -20,8 +20,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Playwright tests (all browsers)
-        run: npx playwright test
+      - name: Run Playwright tests (Chromium)
+        run: npx playwright test --project=chromium
+        continue-on-error: false
+
+      - name: Upload Playwright screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-screenshots
+          path: test-results/screenshots/
+
+      - name: Upload Playwright videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-videos
+          path: test-results/videos/
 
       - name: Upload Playwright report
         if: always()

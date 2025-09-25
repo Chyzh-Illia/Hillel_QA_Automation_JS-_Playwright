@@ -1,0 +1,23 @@
+name: Cypress Tests in Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Run Cypress inside Docker
+        run: |
+          docker run -i \
+            -v ${{ github.workspace }}:/e2e \
+            -w /e2e \
+            cypress/included:9.7.0 \
+            --browser firefox --config integrationFolder=cypress/e2e

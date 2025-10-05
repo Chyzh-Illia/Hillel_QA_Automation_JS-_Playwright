@@ -59,4 +59,37 @@ test.describe('HTTP => Authorization qauto page', () => {
         await console.log(bodyCarDeleted);
         await page.waitForURL("**/panel/garage");
     });
+
+    test('Negative: Create car without authorization => should return 401', async ({ request }) => {
+    const response = await request.post('/api/cars', {
+        data: {
+        carBrandId: 1,
+        carModelId: 1,
+        mileage: 1000
+        }
+    });
+
+    expect(response.status()).toBe(401); // now will be 201, using setup file... in the another options, it will be 401;
+    const body = await response.json();
+    expect(body.status).toBe('error');
+    expect(body.message).toContain('Not authenticated');
+    });
+
+    test('Negative: Create car with invalid mileage => should return 400', async ({ request, page }) => {
+    await page.goto('/');
+    
+    const response = await page.request.post('/api/cars', {
+        data: {
+        carBrandId: 1,
+        carModelId: 1,
+        mileage: -500 //incorrect value, can add only 0 - 999999
+        }
+    });
+
+    expect(response.status()).toBe(401);
+    const body = await response.json();
+    expect(body.status).toBe('error');
+    expect(body.message).toContain('Mileage has to be from 0 to 999999');
+    });
+
 });
